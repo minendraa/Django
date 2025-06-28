@@ -27,8 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'index'
 
 # Application definition
+
+MIDDLEWARE = [
+    ...
+    'yourapp.middleware.redirect_middleware.RedirectUnauthenticatedMiddleware',
+]
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
