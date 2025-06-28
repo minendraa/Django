@@ -33,7 +33,6 @@ LOGIN_REDIRECT_URL = 'index'
 # Application definition
 
 MIDDLEWARE = [
-    ...
     'yourapp.middleware.redirect_middleware.RedirectUnauthenticatedMiddleware',
 ]
 
