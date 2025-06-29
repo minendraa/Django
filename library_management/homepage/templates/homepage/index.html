@@ -7,13 +7,26 @@
     <div class="section">
         <p>Manage your library efficiently — add, borrow, and track books.</p>
         <div class="action-buttons">
-            <a href="{% url 'view_book' %}" class="btn btn-primary">View Books</a>
-            <a href="{% url 'addbook' %}" class="btn btn-primary">Add Books</a>
-            <a href="{% url 'addmember' %}" class="btn btn-primary">Add Member</a>
-            <a href="{% url 'view_members' %}" class="btn btn-primary">View Members</a>
-            <a href="{% url 'borrow' %}" class="btn btn-primary">Borrow</a>
-            <a href="{% url 'returnbook' %}" class="btn btn-primary">Return Book</a>
+            <a href="{% url 'view_book' %}" class="btn btn-primary action-link">View Books</a>
+            <a href="{% url 'addbook' %}" class="btn btn-primary action-link">Add Books</a>
+            <a href="{% url 'addmember' %}" class="btn btn-primary action-link">Add Member</a>
+            <a href="{% url 'view_members' %}" class="btn btn-primary action-link">View Members</a>
+            <a href="{% url 'borrow' %}" class="btn btn-primary action-link">Borrow</a>
+            <a href="{% url 'returnbook' %}" class="btn btn-primary action-link">Return Book</a>
         </div>
     </div>
 </div>
+
+<script>
+    const isAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+
+    if (!isAuthenticated) {
+        document.querySelectorAll('.action-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('You must be logged in to perform this action.');
+            });
+        });
+    }
+</script>
 {% endblock %}

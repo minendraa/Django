@@ -6,8 +6,12 @@ from django.utils import timezone
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
 
+# def index(request):
+#     return render(request, 'homepage/.html', {'now': datetime.now()})
+
 def index(request):
-    return render(request, 'homepage/index.html', {'now': datetime.now()})
+    return render(request, 'homepage/index.html', {'user_authenticated': request.user.is_authenticated,'now': datetime.now()})
+
 
 @login_required
 def add_members(request):

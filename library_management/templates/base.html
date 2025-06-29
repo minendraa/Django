@@ -270,10 +270,10 @@
             </a>
             
             <div class="nav-links">
-                <a href="{% url 'view_book' %}">Books</a>
-                <a href="{% url 'view_members' %}">Members</a>
-                <a href="{% url 'borrow' %}">Borrow</a>
-                <a href="{% url 'returnbook' %}">Returns</a>
+                <a href="{% url 'view_book' %}"class="popup action-link">Books</a>
+                <a href="{% url 'view_members' %}"class="popup action-link">Members</a>
+                <a href="{% url 'borrow' %}"class="popup action-link">Borrow</a>
+                <a href="{% url 'returnbook' %}"class="popup action-link">Returns</a>
             </div>
             
             <div class="auth-buttons">
@@ -318,6 +318,19 @@
         </div>
     </footer>
 
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
+    <script>
+    const isAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+
+    if (!isAuthenticated) {
+        document.querySelectorAll('.action-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('You must be logged in to perform this action.');
+            });
+        });
+    }
+    </script>
 </body>
 </html>
